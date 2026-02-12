@@ -132,7 +132,7 @@ margin-bottom: 80px;
 display: flex;
 justify-content: space-between;
 align-items: flex-start;
-gap: 20px;
+/* gap: 20px; */
 flex-wrap: wrap;
 }
 
@@ -152,7 +152,7 @@ flex-wrap: wrap;
 
 .stats__item--wide {
   flex: 1;
-  max-width: 600px;
+  max-width: 650px;
 }
 
 .stats__number {
@@ -501,8 +501,22 @@ font-size: 48px;
 .values__text { font-size: 30px; } */
 }
 
-/* 1400 и ниже
+/* 1400 и ниже */
 @media (max-width: 1400px) {
+  .stats__item:nth-child(1),
+  .stats__item:nth-child(2) {
+    flex: 0 1 calc(50% - 40px);
+    max-width: 500px;
+  }
+  .stats__item:nth-child(3) {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+}
 /* .stats__number { font-size: 44px; } */
 /* .mission__text { font-size: 26px; } */
 
@@ -542,7 +556,7 @@ font-size: 48px;
 
   .stats__item--wide {
     flex: 0 1 calc(50% - 40px);
-    max-width: 500px;
+    max-width: 650px;
   }
 .stats__item--wide { flex: auto; }
 /* .stats__desc { font-size: 24px; } */

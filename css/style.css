@@ -219,6 +219,91 @@ position: relative;
 width: 50%;
 aspect-ratio: 960 / 683;
 flex-shrink: 0;
+overflow: hidden;
+}
+
+.production__slider {
+  width: 100%;
+  height: 100%;
+}
+
+.production__slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.production__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.production__slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.production__arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.production__arrow {
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.production__arrow:hover {
+  transform: scale(1.1);
+}
+
+.production__arrow--right img {
+  transform: rotate(180deg);
+}
+
+.production__dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 2;
+}
+
+.production__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.production__dot.active {
+  background: white;
 }
 
 .production__img {
@@ -424,6 +509,11 @@ font-size: 48px;
 
 /* 1200 и ниже */
 @media (max-width: 1200px) {
+.production__gallery {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 .stats__row {
 flex-direction: column;
 align-items: center;
@@ -542,4 +632,26 @@ font-size: 12px;
 .values__text { font-size: 18px; } */
 
 .breadcrumbs__list { flex-wrap: wrap; }
+
+.hero,
+  .mission,
+  .stats,
+  .map,
+  .production,
+  .values {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* .production__inner {
+    gap: 20px;
+  } */
+  
+  /* .production__content {
+    padding: 0 15px 30px;
+  } */
+  
+  /* .values__row {
+    gap: 20px;
+  } */
 }

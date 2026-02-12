@@ -16,7 +16,7 @@
       
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ul class="breadcrumbs__list">
-          <li class="breadcrumbs__item"><a href="ССЫЛКА НА ГЛВНУЮ" class="breadcrumbs__link">Главная</a></li>
+          <li class="breadcrumbs__item"><a href="ССЫЛКА НА ГЛАВНУЮ" class="breadcrumbs__link">Главная</a></li>
           <li class="breadcrumbs__item"><span class="breadcrumbs__current">/ О бренде</span></li>
         </ul>
       </nav>
@@ -37,7 +37,7 @@
       <div class="container stats__container">
         <h2 class="stats__title">О нас в цифрах</h2>
         <div class="stats__row">
-      
+          
           <div class="stats__item">
             <div class="stats__number">
               <span class="stats__greater">></span> 27
@@ -64,7 +64,7 @@
 
         </div>
       </div>
-  </section>
+    </section>
 
     <section class="map">
       <div class="container map__container">
@@ -76,7 +76,14 @@
       <div class="production__inner">
         
         <div class="production__gallery">
-          <img src="images/3.png" alt="Производственная линия" class="production__img">
+          <div class="production__slider">
+            <div class="production__slides">
+              <img src="images/3.png" alt="Производственная линия" class="production__slide active">
+              <img src="images/11.png" alt="Производственный цех" class="production__slide">
+              <img src="images/12.png" alt="Контроль качества" class="production__slide">
+              <img src="images/13.png" alt="Готовая продукция" class="production__slide">
+            </div>
+          </div>
           
           <div class="production__arrows">
             <button class="production__arrow production__arrow--left" type="button" aria-label="Предыдущий слайд">
@@ -88,7 +95,10 @@
           </div>
           
           <div class="production__dots">
-            <img src="images/8.png" alt="Индикатор слайдов" class="production__dots-img">
+            <div class="production__dot active"></div>
+            <div class="production__dot"></div>
+            <div class="production__dot"></div>
+            <div class="production__dot"></div>
           </div>
         </div>
         
@@ -161,5 +171,89 @@
     </section>
 
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.production__slide');
+      const dots = document.querySelectorAll('.production__dot');
+      const prevBtn = document.querySelector('.production__arrow--left');
+      const nextBtn = document.querySelector('.production__arrow--right');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        let newIndex = currentSlide + 1;
+        if (newIndex >= slides.length) {
+          newIndex = 0;
+        }
+        showSlide(newIndex);
+      }
+
+      function prevSlide() {
+        let newIndex = currentSlide - 1;
+        if (newIndex < 0) {
+          newIndex = slides.length - 1;
+        }
+        showSlide(newIndex);
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          prevSlide();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          nextSlide();
+        });
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+          showSlide(index);
+        });
+      });
+
+      let autoPlay = setInterval(nextSlide, 5000);
+
+      const gallery = document.querySelector('.production__gallery');
+      if (gallery) {
+        gallery.addEventListener('mouseenter', function() {
+          clearInterval(autoPlay);
+        });
+
+        gallery.addEventListener('mouseleave', function() {
+          autoPlay = setInterval(nextSlide, 5000);
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        gallery.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        gallery.addEventListener('touchend', function(e) {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 50) {
+            nextSlide();
+          } else if (touchEndX - touchStartX > 50) {
+            prevSlide();
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

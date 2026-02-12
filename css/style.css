@@ -614,7 +614,8 @@ font-size: 12px;
 /* 480 и ниже */
 @media (max-width: 480px) {
 /* .stats__title { font-size: 28px; }
-.stats__number { font-size: 35px; } */
+.stats__number { font-size: 35px; }
+.stats__desc {font-size: 25px;} */
 
 .stats__number {
     white-space: normal;
@@ -623,6 +624,7 @@ font-size: 12px;
 
   .stats__unit {
     white-space: normal;
+    font-size: 39px;
   }
 
 .production__list { gap: 10px; }
